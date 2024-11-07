@@ -1,0 +1,6 @@
+@TransactionService.API_HostAddress = http://localhost:5067
+
+GET {{TransactionService.API_HostAddress}}/
+Accept: application/json
+
+###

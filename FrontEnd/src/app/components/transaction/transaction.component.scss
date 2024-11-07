@@ -1,0 +1,55 @@
+.transaction-container {
+  max-width: 600px; /* Defina uma largura máxima para o formulário */
+  margin: auto; /* Centraliza o contêiner */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column; /* Alinha os elementos em coluna */
+}
+
+.form-group {
+  display: flex; /* Usar flexbox para alinhar o label e o input */
+  margin-bottom: 15px; /* Espaçamento entre os grupos de formulário */
+}
+
+.is-invalid {
+  border: 1px solid red; /* Borda vermelha para campos inválidos */
+}
+
+.form-group label {
+  flex: 0 0 150px; /* Largura fixa para os labels */
+  margin-right: 10px; /* Espaçamento entre o label e o input */
+  text-align: left; /* Alinha o texto do label à esquerda */
+}
+
+input, select {
+  flex: 1; /* O input e select ocupam o restante do espaço */
+  padding: 5px; /* Espaçamento interno dos inputs */
+}
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Ajuste o valor conforme necessário */
+}
+
+.transaction-grid {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaction-row {
+  display: table-row;
+}
+
+.transaction-cell {
+  display: table-cell;
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.transaction-cell:nth-child(3) {
+  text-align: right; /* Alinha o valor da moeda à direita */
+}

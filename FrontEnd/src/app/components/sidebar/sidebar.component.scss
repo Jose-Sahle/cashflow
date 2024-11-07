@@ -1,0 +1,50 @@
+/* Variáveis de cor */
+$primary-bg-gradient-start: #000080; /* Azul marinho */
+$primary-bg-gradient-end: #0000FF; /* Azul */
+$hover-bg: #3333FF; /* Azul um pouco mais claro para o hover */
+$primary-color: white;
+$selected-underline: underline; /* Estilo sublinhado para o item selecionado */
+
+/* Sidebar */
+.sidebar {
+  height: 100vh; /* Altura total da viewport */
+  width: 250px; /* Largura da sidebar */
+  background: linear-gradient($primary-bg-gradient-start, $primary-bg-gradient-end); /* Fundo degradê */
+  padding-top: 20px; /* Espaçamento no topo */
+  position: fixed; /* Fixa a sidebar */
+  top: 0; /* Alinha ao topo */
+  left: 0; /* Alinha à esquerda */
+  overflow-x: hidden; /* Desabilita o scroll horizontal */
+
+  h2 {
+    color: $primary-color; /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+  }
+
+  ul {
+    list-style-type: none; /* Remove marcadores de lista */
+    padding: 0; /* Remove padding padrão */
+  }
+
+  li {
+    padding: 8px 0 8px 16px; /* Espaçamento interno dos itens da lista */
+    text-align: left; /* Alinha o texto à esquerda */
+
+    &.selected a {
+      //background-color: $hover-bg; /* Fundo do item selecionado */
+      text-decoration: $selected-underline; /* Sublinhado no item selecionado */
+    }
+  }
+
+  a {
+    padding: 8px 0; /* Espaçamento interno dos links */
+    text-decoration: none; /* Remove sublinhado dos links */
+    font-size: 18px; /* Tamanho da fonte dos links */
+    color: $primary-color; /* Cor do texto dos links */
+    display: block; /* Exibição em bloco */
+  }
+
+  a:hover {
+    background-color: $hover-bg; /* Cor de fundo ao passar o mouse */
+  }
+}

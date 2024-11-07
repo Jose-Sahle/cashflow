@@ -1,0 +1,58 @@
+<div class="transaction-container">
+  <h2>Transaction Management</h2>
+  <form #transactionForm="ngForm" (ngSubmit)="onSubmit(transactionForm)" class="form-container">
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" id="description" [(ngModel)]="selectedTransaction!.description" name="description" [disabled]="!isEditing" required>
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="text" id="amount" [(ngModel)]="selectedTransaction!.amount" name="amount"
+             [disabled]="!isEditing" required (input)="formatAmount($event)"
+             [ngClass]="{'is-invalid': transactionForm.controls.amount?.errors?.invalidAmount}" />
+      <div *ngIf="transactionForm.controls.amount?.errors?.invalidAmount" class="error-message">
+        Amount must be greater than zero.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <select id="type" [(ngModel)]="selectedTransaction!.type" name="type" [disabled]="!isEditing" required
+              [ngClass]="{'is-invalid': transactionForm.controls.type?.errors?.invalidType}">
+        <option [ngValue]="TransactionType.None">-</option>
+        <option [ngValue]="TransactionType.Credit">Credit</option>
+        <option [ngValue]="TransactionType.Debit">Debit</option>
+      </select>
+      <div *ngIf="transactionForm.controls.type?.errors?.invalidType" class="error-message">
+        Please select a valid type.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" id="date" [(ngModel)]="selectedTransaction!.date" name="date" [disabled]="!isEditing" required
+             [ngClass]="{'is-invalid': transactionForm.controls.date?.errors?.required}">
+      <div *ngIf="transactionForm.controls.date?.errors?.required" class="error-message">
+        Date is required.
+      </div>
+    </div>
+    <div *ngIf="isEditing" class="button-container">
+      <button type="submit">Add Transaction</button>
+      <button type="button" (click)="cancelSelectedTransaction()">Cancel</button>
+    </div>
+  </form>
+  <div *ngIf="!isEditing">
+    <button (click)="newTransaction()" [hidden]="isEditing">New</button>
+  </div>
+  <p></p>
+  <p></p>
+  <div class="operations-list">
+    <h3>Operations</h3>
+    <ul class="transaction-grid">
+      <li *ngFor="let transaction of transactions" class="transaction-row">
+        <span class="transaction-cell">{{ transaction.description }}</span>
+        <span class="transaction-cell">{{ transaction.date | date:'dd/MM/yyyy' }}</span>
+        <span class="transaction-cell">{{ transaction.amount | currency:'R$':'symbol':'1.2-2' }}</span>
+        <span class="transaction-cell">{{ getTransactionType(transaction.type) }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

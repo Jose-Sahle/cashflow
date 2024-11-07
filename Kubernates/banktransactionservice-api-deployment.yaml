@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banktransactionservice-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banktransactionservice-api
+  template:
+    metadata:
+      labels:
+        app: banktransactionservice-api
+    spec:
+      containers:
+      - name: banktransactionservice-api
+        image: josesahle/cashflow:server
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+        - name: ConnectionStrings__MongoDb
+          value: "mongodb://mongodb:27017/finance"
+        - name: RabbitMqSettings__HostName
+          value: "rabbitmq"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: banktransactionservice-api
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+  selector:
+    app: banktransactionservice-api
